@@ -14,6 +14,12 @@ https://raw.githubusercontent.com/JFLXCLOUD/NeXroll/main/Plugins/jellyfin/manife
 https://raw.githubusercontent.com/JFLXCLOUD/NeXroll/main/Plugins/jellyfin/manifest-10.11.json
 ```
 
+**Jellyfin 10.10:**
+
+```text
+https://raw.githubusercontent.com/JFLXCLOUD/NeXroll/main/Plugins/jellyfin/manifest-10.10.json
+```
+
 Enable the repository, open **Catalog**, and install **NeXroll Intros**. Restart Jellyfin after installation. Future plugin versions are picked up by Jellyfin's **Update Plugins** scheduled task; restart Jellyfin after an update to load it.
 
 Use only the repository matching your server. When upgrading Jellyfin from 10.11 to 12, remove the 10.11 repository and add the 12 repository, then install the compatible plugin.
@@ -33,14 +39,14 @@ Plugin updates do not update the NeXroll application. The Jellyfin 12 API permis
 
 ## Release maintenance
 
-The plugin build workflow publishes both server variants. After both builds succeed, `update_repository.py` downloads the actual release ZIPs, validates their identity and contents, and publishes separate `-repository.zip` assets with automatic updates enabled. It verifies the uploaded DLL and thumbnail against the originals before writing the manifests. Jellyfin requires the ZIP's MD5 checksum in each manifest entry.
+The plugin build workflow publishes all three server variants. After every build succeeds, `update_repository.py` downloads the actual release ZIPs, validates their identity and contents, and publishes separate `-repository.zip` assets with automatic updates enabled. It verifies the uploaded DLL and thumbnail against the originals before writing the manifests. Jellyfin requires the ZIP's MD5 checksum in each manifest entry.
 
 Original assets are never overwritten. A plugin version already in the catalog keeps its original URL and checksum, even when an application beta ships the same plugin again. Bump the plugin assembly and metadata versions together when plugin code changes. The catalog versions are numeric plugin versions, independent of the application's stable or beta version.
 
-Run manually for an existing published release containing both plugin ZIPs:
+Run manually for an existing published release containing all three plugin ZIPs:
 
 ```bash
 python Plugins/jellyfin/update_repository.py --repository JFLXCLOUD/NeXroll --tag v2.0.5
 ```
 
-Review and commit both manifest files after a manual run. The workflow commits them automatically after future tagged builds. For a workflow dispatch, select the ref containing the intended plugin source and supply the existing release tag.
+Review and commit the manifest files after a manual run. The workflow commits them automatically after future tagged builds. For a workflow dispatch, select the ref containing the intended plugin source and supply the existing release tag.

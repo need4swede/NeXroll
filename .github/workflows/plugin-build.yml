@@ -1,6 +1,6 @@
 name: Build and Attach Jellyfin Plugins
 
-# Builds separate NeXroll Intros packages for Jellyfin 10.11 and Jellyfin 12.
+# Builds separate NeXroll Intros packages for Jellyfin 10.10, 10.11 and 12.
 # Each install zip (DLL + meta.json + thumb.png) is attached to the matching
 # GitHub release, so users always have a ready download for the current plugin
 # instead of building it themselves.
@@ -30,6 +30,8 @@ jobs:
     strategy:
       matrix:
         include:
+          - directory: NeXroll.Jellyfin1010
+            sdk: '8.0.x'
           - directory: NeXroll.Jellyfin
             sdk: '9.0.x'
           - directory: NeXroll.Jellyfin12

@@ -15,7 +15,8 @@ import zipfile
 
 GUID = 'a1b2c3d4-e5f6-7890-abcd-ae0c01100001'
 VARIANTS = [('NeXroll.Jellyfin12', '12.0.0.0', 'manifest.json'),
-            ('NeXroll.Jellyfin', '10.11.0.0', 'manifest-10.11.json')]
+            ('NeXroll.Jellyfin', '10.11.0.0', 'manifest-10.11.json'),
+            ('NeXroll.Jellyfin1010', '10.10.0.0', 'manifest-10.10.json')]
 
 
 def version_key(version):
@@ -112,7 +113,7 @@ def publish(repository, tag, output):
                 'changelog': f'NeXroll Intros {version}. Repository package enables automatic plugin updates.'})
             versions.sort(key=lambda v: version_key(v['version']), reverse=True)
             pending.append((target, catalog))
-        # Write pointers only after both families have been validated and uploaded.
+        # Write pointers only after all families have been validated and uploaded.
         output.mkdir(parents=True, exist_ok=True)
         for target, catalog in pending:
             target.write_text(json.dumps(catalog, indent=2) + '\n', encoding='utf-8')

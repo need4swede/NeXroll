@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>NeXroll.Jellyfin</RootNamespace>
+    <AssemblyName>NeXroll.Jellyfin</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DefineConstants>$(DefineConstants);JELLYFIN1010</DefineConstants>
+  </PropertyGroup>
+  <!-- Pin to the floor of the 10.10 series so the plugin loads on any 10.10.x
+       server. Never ship Jellyfin's own assemblies in the install package. -->
+  <ItemGroup>
+    <PackageReference Include="Jellyfin.Controller" Version="[10.10.0]" />
+    <PackageReference Include="Jellyfin.Data" Version="[10.10.0]" />
+    <PackageReference Include="Jellyfin.Model" Version="[10.10.0]" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.*" />
+  </ItemGroup>
+  <!-- Share behavior and settings with the 10.11 plugin. -->
+  <ItemGroup>
+    <Compile Include="../NeXroll.Jellyfin/*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="../NeXroll.Jellyfin/Properties/AssemblyInfo.cs" Link="Properties/AssemblyInfo.cs" />
+    <EmbeddedResource Include="../NeXroll.Jellyfin/Configuration/configPage.html"
+                      LogicalName="NeXroll.Jellyfin.Configuration.configPage.html" />
+    <None Include="meta.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../NeXroll.Jellyfin/thumb.png" Link="thumb.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

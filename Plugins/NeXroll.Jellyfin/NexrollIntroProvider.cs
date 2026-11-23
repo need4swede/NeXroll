@@ -2,7 +2,11 @@ using System.Net.Http.Json;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
+#if JELLYFIN1010
+using Jellyfin.Data.Entities;
+#else
 using Jellyfin.Database.Implementations.Entities;
+#endif
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Entities.TV;
